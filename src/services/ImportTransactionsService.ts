@@ -57,13 +57,11 @@ class ImportTransactionsService {
 
     const transactions: Transaction[] = [];
 
-    const promises = transactionsCSV.map(async t => {
+    for (const t of transactionsCSV) {
       const transaction = await createTransaction.execute(t);
 
       transactions.push(transaction);
-    });
-
-    await Promise.all(promises);
+    }
 
     return transactions;
   }
